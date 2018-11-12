@@ -2,8 +2,11 @@ package acronymextract;
 
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class Acronymextract {
@@ -12,7 +15,7 @@ public class Acronymextract {
     public static void main(String[] args) throws IOException
     {
         try {
-            PdfReader reader = new PdfReader("2016.pdf");
+            PdfReader reader = new PdfReader(args[0]);
             int numberOfpages=reader.getNumberOfPages();
             for (int i=1;i<=numberOfpages;i++)
             {
@@ -24,13 +27,19 @@ public class Acronymextract {
             //System.out.println("File contents are: ");
             //System.out.println(pdfText);
                                
-            System.out.print("The Acronyms in the file are: ");
-            ArrayList<String> list=Helper.getAcronymList(pdfText.toString());
-            System.out.println(list.size());
-            for(String s:list)
+            System.out.print("The Acronyms in the file are: \n");
+            HashMap<String,String> list=Helper.getAcronymList(pdfText.toString());
+            System.out.println("No. of Acronyms Found : "+list.size());
+            FileWriter fw = new FileWriter("AcronymsExtracted.csv");
+            fw.write("File Name : "+args[0]+"\n"+"No. of Acronyms Found : "+list.size()+"\n");
+            fw.write("Acronyms, FullForms\n");
+            for(Map.Entry m:list.entrySet())
             {
-                System.out.println(s);
+                System.out.println(m.getKey()+" : "+m.getValue());
+                fw.write(m.getKey()+","+m.getValue()+"\n");
             }
+            fw.flush();
+            fw.close();
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();

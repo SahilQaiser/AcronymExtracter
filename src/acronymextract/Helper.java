@@ -1,6 +1,7 @@
 package acronymextract;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -8,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class Helper 
 {    
-    public static ArrayList<String> getAcronymList(String pdfText)
+    public static HashMap<String,String> getAcronymList(String pdfText)
     {
         ArrayList<String> acro_list=new ArrayList<>();
         String acro="";
@@ -29,36 +30,13 @@ public class Helper
         {
            acro=acro+matcher.group()+",";
         }
-//        pattern=Pattern.compile(regEX3);
-//        matcher=pattern.matcher(pdfText);
-//        while(matcher.find())
-//        {
-//           acro=acro+matcher.group()+",";
-//        }
-//        pattern=Pattern.compile(regEX4);
-//        matcher=pattern.matcher(pdfText);
-//        while(matcher.find())
-//        {
-//           acro=acro+matcher.group()+",";
-//        }
-//        pattern=Pattern.compile(regEX5);
-//        matcher=pattern.matcher(pdfText);
-//        while(matcher.find())
-//        {
-//           acro=acro+matcher.group()+",";
-//        }
-//        pattern=Pattern.compile(regEX6);
-//        matcher=pattern.matcher(pdfText);
-//        while(matcher.find())
-//        {
-//           acro=acro+matcher.group()+",";
-//        }
-        ArrayList<String> uninqueAcroList= getIndividualTokens(acro,acro_list);// get invidual word, remove the duplicates
+        
+        HashMap<String,String> uniqueAcroList= getIndividualTokens(acro,acro_list);// get invidual word, remove the duplicates
                                                                                //and save it into acrolist
-        return uninqueAcroList;
+        return uniqueAcroList;
     }
 
-    private static ArrayList<String> getIndividualTokens(String acro,ArrayList<String> acro_list)
+    private static HashMap<String,String> getIndividualTokens(String acro,ArrayList<String> acro_list)
     {
         String [] acro_tokens=acro.split(",");//split on the base of space b/w the words
         for (String token : acro_tokens) 
@@ -69,6 +47,18 @@ public class Helper
                 acro_list.add(token);
             }
         }
-        return  acro_list;
+        HashMap<String,String> hm=getHashMap(acro_list);
+        return  hm;
+    }
+    private static HashMap<String,String> getHashMap(ArrayList<String> acro_list)
+    {
+        HashMap<String,String> acroList = new HashMap<>();
+        for(String s:acro_list)
+        {
+            String[] words=s.split("[(]");
+            words[1]=words[1].replace(')', ' ');
+            acroList.put(words[1], words[0]);
+        }        
+        return acroList;
     }
 }
