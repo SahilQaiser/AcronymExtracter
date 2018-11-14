@@ -13,11 +13,11 @@ public class Helper
     {
         ArrayList<String> acro_list=new ArrayList<>();
         String acro="";
-        String regEX2="\\b[A-Za-z]{2,20} [A-Za-z]{2,20} [(][A-Z]{2,2}[s]?[)] \\b" ; // for acronyms of length 2
-        String regEX3="\\b[A-Za-z]{2,20} [A-Za-z]{2,20} [A-Za-z]{2,20} [(][A-Z]{3,3}[s]?[)] \\b"; // for acronyms of length 3...
-        String regEX4="\\b[A-Za-z]{2,20} [A-Za-z]{2,20} [A-Za-z]{2,20} [A-Za-z]{2,20} [(][A-Z]{4,4}[s]?[)] \\b"; // for acronyms of length 4...
-        String regEX5="\\b[A-Za-z]{2,20} [A-Za-z]{2,20} [A-Za-z]{2,20} [A-Za-z]{2,20} [A-Za-z]{2,20} [(][A-Z]{5,5}[s]?[)] \\b"; // for acronyms of length 4...
-        String regEX6="\\b[A-Za-z]{2,20} [A-Za-z]{2,20} [A-Za-z]{2,20} [A-Za-z]{2,20} [A-Za-z]{2,20} [A-Za-z]{2,20} [(][A-Z]{6,6}[s]?[)] \\b"; // for acronyms of length 4...
+        String regEX2="\\b[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[(][A-Z]{2,2}[s]?[)][.,]?[ ]*\\b" ; // for acronyms of length 2
+        String regEX3="\\b[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[(][A-Z]{3,3}[s]?[)][.,]?[ ]*\\b"; // for acronyms of length 3...
+        String regEX4="\\b[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[(][A-Z]{4,4}[s]?[)][.,]?[ ]*\\b"; // for acronyms of length 4...
+        String regEX5="\\b[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[(][A-Z]{5,5}[s]?[)][.,]?[ ]*\\b"; // for acronyms of length 4...
+        String regEX6="\\b[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[(][A-Z]{6,6}[s]?[)][.,]?[ ]*\\b"; // for acronyms of length 4...
         
 //          String regEX="\\s*[A-Z]{3,}"
 //                    + "[\\s]?"
@@ -29,6 +29,7 @@ public class Helper
         while(matcher.find())
         {
            acro=acro+matcher.group()+",";
+           //System.out.println(matcher.group());
         }
         
         HashMap<String,String> uniqueAcroList= getIndividualTokens(acro,acro_list);// get invidual word, remove the duplicates
@@ -56,8 +57,17 @@ public class Helper
         for(String s:acro_list)
         {
             String[] words=s.split("[(]");
-            words[1]=words[1].replace(')', ' ');
-            acroList.put(words[1], words[0]);
+            if(words.length>1)
+            {
+                words[1]=words[1].replace(')', ' ');
+            
+                if(acroList.containsKey(words[1]))
+                {
+                    String val=words[0]+","+acroList.get(words[1]);
+                    words[0]=val;
+                }
+                acroList.put(words[1], words[0]);
+            }
         }        
         return acroList;
     }

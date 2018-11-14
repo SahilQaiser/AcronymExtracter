@@ -15,7 +15,7 @@ public class Acronymextract {
     public static void main(String[] args) throws IOException
     {
         try {
-            PdfReader reader = new PdfReader(args[0]);
+            PdfReader reader = new PdfReader(args[2]);
             int numberOfpages=reader.getNumberOfPages();
             for (int i=1;i<=numberOfpages;i++)
             {
@@ -24,9 +24,8 @@ public class Acronymextract {
 //                 pdfText =pdfText+ PdfTextExtractor.getTextFromPage(reader, i);//  i indicates the page number, 
 //                 pdfText+='\n'; //separates the text of pages
             }         
-            //System.out.println("File contents are: ");
-            //System.out.println(pdfText);
-                               
+            //String text="Aam Admi Party (AAP) All india Radio (AIR) this is just a normal aam aadmi party (AAP) it can also mean Aasan Aasan Project (AAP) All India Reports (AIR) juts a sample it was ";
+            System.out.println(pdfText);
             System.out.print("The Acronyms in the file are: \n");
             HashMap<String,String> list=Helper.getAcronymList(pdfText.toString());
             System.out.println("No. of Acronyms Found : "+list.size());
