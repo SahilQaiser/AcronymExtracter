@@ -1,25 +1,38 @@
 File Name : 2016.pdf
-No. of Acronyms Found : 22
+No. of Acronyms Found : 27
 Acronyms, FullForms
-CNN ,Convolutional Neural Network 
-KL  ,Leibler 
-RBMs  ,Restricted Boltzmann Machines 
-PET ,positron emission tomography 
-CAD . ,assisted diagnosis 
-DLMIA . ,Learning in Medical Image Analysis 
-SAE  ,of sparse autoencoder 
-RNN ,Recurrent Neural Network 
-PCA  ,principal component analysis 
-SDAE  ,Stack denoising autoencoder 
-SAEs  ,Stacked autoencoders 
-KDE  ,Kernel density estimation 
-DBN  ,Deep Belief Networks 
+CAE ,suggested convolutional autoencoder 
+
+RBMs ,Restricted Boltzmann Machines 
+GAN ,Generative Adversarial Network 
 CT ,computed tomography 
 VAE ,called variational autoencoder 
-SGVB  ,gradient variational Bayes 
-DBM  ,Deep Boltzmann machine 
-SVM  ,Machine 
-DAEs  ,Denoising autoencoder 
-SSAE  ,autoencoder 
-MRI ,imaging 
-DGMs  ,deep generative models 
+DBN ,Deep Belief Networks 
+ROIs ,adversarial learning for 
+
+SGVB ,stochastic 
+gradient variational Bayes 
+PCA ,principal component analysis 
+FFNN ,are Feedforward Neural Network 
+MRF ,Markov Random Field 
+DLMIA .,Learning in Medical Image Analysis 
+KL ,Kullback-Leibler 
+CNN ,Convolutional Neural Network 
+PET ,positron emission tomography 
+SSAE ,Stacked sparse 
+autoencoder 
+RNN ,Recurrent Neural Network 
+DGMs ,deep generative models 
+DAEs ,autoencoder 
+Denoising autoencoder 
+DBM ,Deep Boltzmann machine 
+SAE ,of sparse autoencoder 
+SVM ,Support Vector 
+Machine 
+SAEs ,Stacked autoencoders 
+KDE ,Kernel density estimation 
+MRI ,magnetic resonance 
+imaging 
+CAD .,computer-assisted diagnosis 
+,computer-assisted diagnosis 
+SDAE ,Stack denoising autoencoder 

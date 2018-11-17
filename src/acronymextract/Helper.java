@@ -2,8 +2,6 @@ package acronymextract;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,22 +11,18 @@ public class Helper
     {
         ArrayList<String> acro_list=new ArrayList<>();
         String acro="";
-        String regEX2="\\b[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[(][A-Z]{2,2}[s]?[)][.,]?[ ]*\\b" ; // for acronyms of length 2
-        String regEX3="\\b[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[(][A-Z]{3,3}[s]?[)][.,]?[ ]*\\b"; // for acronyms of length 3...
-        String regEX4="\\b[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[(][A-Z]{4,4}[s]?[)][.,]?[ ]*\\b"; // for acronyms of length 4...
-        String regEX5="\\b[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[(][A-Z]{5,5}[s]?[)][.,]?[ ]*\\b"; // for acronyms of length 4...
-        String regEX6="\\b[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[A-Za-z]{2,20}[ ]*[(][A-Z]{6,6}[s]?[)][.,]?[ ]*\\b"; // for acronyms of length 4...
+        String regEX2="\\b[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[(][A-Z]{2,2}[s]?[)][.,]?\\s*\\b" ; // for acronyms of length 2
+        String regEX3="\\b[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[(][A-Z]{3,3}[s]?[)][.,]?\\s*\\b"; // for acronyms of length 3...
+        String regEX4="\\b[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[(][A-Z]{4,4}[s]?[)][.,]?\\s*\\b"; // for acronyms of length 4...
+        String regEX5="\\b[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[(][A-Z]{5,5}[s]?[)][.,]?\\s*\\b"; // for acronyms of length 5...
+        String regEX6="\\b[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[(][A-Z]{6,6}[s]?[)][.,]?\\s*\\b"; // for acronyms of length 6...
+        String regEX7="\\b[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[A-Za-z]{2,20}\\s*-*[(][A-Z]{7,7}[s]?[)][.,]?\\s*\\b"; // for acronyms of length 7...
         
-//          String regEX="\\s*[A-Z]{3,}"
-//                    + "[\\s]?"
-//                    + "[(]"
-//                    + "\\w{3,}\\s*\\w{3,}\\s*\\w{3,}\\s*[)]\\s*" ;
-        
-        Pattern pattern=Pattern.compile(regEX2+"|"+regEX3+"|"+regEX4+"|"+regEX5+"|"+regEX6);  
+        Pattern pattern=Pattern.compile(regEX2+"|"+regEX3+"|"+regEX4+"|"+regEX5+"|"+regEX6+"|"+regEX7);  
         Matcher matcher=pattern.matcher(pdfText);
         while(matcher.find())
         {
-           acro=acro+matcher.group()+",";
+           acro=acro+matcher.group().trim()+",";
            //System.out.println(matcher.group());
         }
         
